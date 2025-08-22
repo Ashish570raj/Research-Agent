@@ -1,0 +1,5 @@
+resenv/
+__pycache__/
+.env
+
+

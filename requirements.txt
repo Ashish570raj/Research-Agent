@@ -1,0 +1,7 @@
+streamlit==1.36.0
+requests>=2.31.0
+dotenv
+fastapi
+uvicorn[standard]
+pydantic
+reportlab
