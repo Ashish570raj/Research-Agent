@@ -27,15 +27,28 @@ def get_ibm_token():
     global last_token, last_time
     if last_token and time.time() - last_time < 3500:  # valid for ~1h
         return last_token
-    token_response = requests.post(
-        "https://iam.cloud.ibm.com/identity/token",
-        data={"apikey": API_KEY, "grant_type": "urn:ibm:params:oauth:grant-type:apikey"},
-        headers={"Content-Type": "application/x-www-form-urlencoded"}
-    )
-    token_response.raise_for_status()
-    last_token = token_response.json().get("access_token")
-    last_time = time.time()
-    return last_token
+    
+    try:
+        response = requests.post(
+            "https://iam.cloud.ibm.com/identity/token",
+            data={"apikey": API_KEY, "grant_type": "urn:ibm:params:oauth:grant-type:apikey"},
+            headers={"Content-Type": "application/x-www-form-urlencoded"},
+            timeout=15
+        )
+
+        if response.status_code != 200:
+            print("⚠️ IBM IAM token request failed")
+            print("Status:", response.status_code)
+            print("Response:", response.text)
+            response.raise_for_status()
+
+        last_token = response.json().get("access_token")
+        last_time = time.time()
+        return last_token
+
+    except Exception as e:
+        print("❌ Exception while getting IAM token:", str(e))
+        raise
 
 @app.post("/predict/")
 async def predict(request: ResearchRequest):
@@ -43,6 +56,9 @@ async def predict(request: ResearchRequest):
         mltoken = get_ibm_token()
     except Exception as e:
         return {"error": f"Failed to get IBM Cloud IAM token: {e}"}
+
+    if not DEPLOYMENT_URL:
+        return {"error": "DEPLOYMENT_URL is not set. Please check your Render environment variables."}
 
     headers = {
         "Content-Type": "application/json",
@@ -55,14 +71,17 @@ async def predict(request: ResearchRequest):
         f"and give actionable suggestions. \n\nQuery: {request.prompt}"
     )
 
-    payload = {
-        "messages": [{"role": "user", "content": research_prompt}]
-    }
+    payload = {"messages": [{"role": "user", "content": research_prompt}]}
 
     def generate_stream():
         try:
-            with requests.post(DEPLOYMENT_URL, headers=headers, json=payload, stream=True) as response:
-                response.raise_for_status()
+            print("➡️ Sending request to IBM Deployment:", DEPLOYMENT_URL)
+            with requests.post(DEPLOYMENT_URL, headers=headers, json=payload, stream=True, timeout=60) as response:
+                print("✅ Response Status:", response.status_code)
+                if response.status_code != 200:
+                    yield f"Error: Deployment request failed. Status: {response.status_code}, Response: {response.text}"
+                    return
+
                 for line in response.iter_lines(decode_unicode=True):
                     if line and line.startswith("data: "):
                         try:
