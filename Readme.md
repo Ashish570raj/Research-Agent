@@ -1,79 +1,106 @@
-AI Research Assistant
-This project is a full-stack, real-time AI Research Assistant designed to help users quickly get summaries, references, and actionable suggestions on academic and scientific topics. The application features a dynamic, streaming user interface powered by Streamlit and a high-performance backend built with FastAPI, all while leveraging enterprise-grade AI from IBM Cloud.
 
-Key Features
-Live-Streaming Responses: Provides a real-time, ChatGPT-like experience by streaming the AI's response directly to the UI as it's generated.
+# 🧠 AI Research Assistant
 
-Decoupled Architecture: Utilizes a professional, decoupled design with a dedicated frontend and backend, ensuring scalability and maintainability.
+A **full-stack, real-time AI Research Assistant** designed to supercharge academic and scientific exploration.
+Get **summaries, references, and actionable insights** instantly — all through a sleek UI powered by **Streamlit** and a high-performance **FastAPI** backend.
 
-Enterprise AI Integration: Integrates with powerful AI models from IBM Cloud Services and the IBM Granite model to deliver high-quality, structured research summaries.
+---
 
-Query History: Saves and displays a history of user queries and responses for easy reference.
+## ✨ Key Features
 
-Structured Output: The AI's response is formatted into clear sections for Summary, References, and Suggestions, making the information easy to digest.
+* ⚡ **Live-Streaming Responses** – Real-time, ChatGPT-like interaction with continuous streaming output.
+* 🏗️ **Decoupled Architecture** – Professional separation of frontend (Streamlit) and backend (FastAPI) for scalability.
+* 🤖 **Enterprise AI Integration** – Leverages **IBM Cloud Services** and the **IBM Granite model** for structured, high-quality results.
+* 📝 **Query History** – Automatically saves and displays past queries & responses.
+* 📑 **Structured Output** – Responses are neatly organized into:
 
-Technologies Used
-Frontend: Streamlit
+  * **Summary**
+  * **References**
+  * **Suggestions**
 
-Backend: FastAPI & Uvicorn
+---
 
-AI Service: IBM Cloud Services & IBM Granite Model
+## 🛠️ Tech Stack
 
-Programming Language: Python
+**Frontend:** Streamlit
+**Backend:** FastAPI + Uvicorn
+**AI Services:** IBM Cloud Services (Granite Model)
+**Language:** Python 🐍
+**Libraries:** `requests`, `python-dotenv`, `pydantic`
+**Concepts:** Natural Language Processing (NLP)
 
-Libraries: requests, python-dotenv, pydantic
+---
 
-Key Concepts: Natural Language Processing (NLP)
+## 🚀 Getting Started
 
-How to Run Locally
-To run this project on your local machine, you will need to set up both the backend and frontend in separate terminals.
+### 🔧 Prerequisites
 
-Prerequisites:
+* Python **3.8+**
+* Virtual environment (recommended)
+* IBM Cloud account with a deployed model + API key
 
-Python 3.8+
+---
 
-A virtual environment (recommended)
+### 📥 Installation
 
-Access to IBM Cloud Services with a deployed model and a generated API key.
+1. **Clone the Repository**
 
-Clone the Repository:
+   ```bash
+   git clone <your-repository-url>
+   cd <your-project-directory>
+   ```
 
-git clone <your-repository-url>
-cd <your-project-directory>
+2. **Install Dependencies**
 
-Install Dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-pip install -r requirements.txt
+3. **Set Up Environment Variables**
+   Create a `.env` file in the root directory:
 
-Set Up Environment Variables:
-Create a .env file in the root directory with your IBM API key and the URL of your deployed model.
+   ```env
+   IBM_API_KEY=your_ibm_api_key_here
+   DEPLOYMENT_URL=your_ibm_deployment_url_here
+   ```
 
-IBM_API_KEY=your_ibm_api_key_here
-DEPLOYMENT_URL=your_ibm_deployment_url_here
+---
 
-Run the Backend:
-Open a terminal, navigate to the project directory, and start the FastAPI server.
+### ▶️ Run Locally
 
+#### 1️⃣ Start Backend (FastAPI)
+
+```bash
 uvicorn backend:app --reload
+```
 
-The server will run on http://127.0.0.1:8000.
+Server will be live at 👉 [http://127.0.0.1:8000](http://127.0.0.1:8000)
 
-Run the Frontend:
-Open a second terminal, navigate to the project directory, and start the Streamlit application.
+#### 2️⃣ Start Frontend (Streamlit)
 
+```bash
 streamlit run ui.py
+```
 
-Your application will open automatically in your web browser.
+The app will open in your browser automatically 🌐
 
-Deployment
+---
 
-This project can be deployed using a variety of services, such as Streamlit Community Cloud for the frontend and Render or Railway for the FastAPI backend. You can also host the entire application from a single script on Streamlit by combining the backend logic into the main Streamlit file.
+## 🌍 Deployment
 
-End Users
-This tool is designed for:
+* **Frontend** → Streamlit Community Cloud
+* **Backend** → Render / Railway
+* **Single Deployment Option** → Merge backend into Streamlit app
 
-Students and Researchers
+---
 
-Writers and Journalists
+## 👥 End Users
 
-Lifelong Learners interested in academic and scientific topics
+This AI Assistant is perfect for:
+
+* 🎓 **Students & Researchers** – Quick summaries & references
+* ✍️ **Writers & Journalists** – Research and fact-checking aid
+* 📚 **Lifelong Learners** – Explore academic & scientific knowledge with ease
+
+---
+
