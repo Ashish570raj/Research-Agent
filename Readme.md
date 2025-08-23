@@ -23,10 +23,15 @@ Get **summaries, references, and actionable insights** instantly — all through
 ## 🛠️ Tech Stack
 
 **Frontend:** Streamlit
+
 **Backend:** FastAPI + Uvicorn
+
 **AI Services:** IBM Cloud Services (Granite Model)
+
 **Language:** Python 🐍
+
 **Libraries:** `requests`, `python-dotenv`, `pydantic`
+
 **Concepts:** Natural Language Processing (NLP)
 
 ---
