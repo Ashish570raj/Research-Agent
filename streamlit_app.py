@@ -6,7 +6,7 @@ from io import BytesIO
 from reportlab.platypus import SimpleDocTemplate, Paragraph
 from reportlab.lib.styles import getSampleStyleSheet
 
-API_URL = "http://127.0.0.1:8000/predict/"
+API_URL = "https://research-agent-97ak.onrender.com/predict/"
 
 st.set_page_config(page_title="AI Research Assistant", layout="wide")
 
